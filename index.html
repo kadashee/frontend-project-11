@@ -16,17 +16,25 @@
         <h1 class="display-3">RSS агрегатор</h1>
         <p class="lead">Начните читать RSS сегодня! Это легко, это красиво.</p>
 
-        <form class="mt-4">
+        <form class="mt-4" id="rss-form" novalidate>
           <div class="row">
             <div class="col">
-              <input
-                      type="text"
-                      class="form-control form-control-lg"
-                      placeholder="Ссылка RSS"
-              >
+              <div class="form-floating">
+                <input
+                  id="url-input"
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Ссылка RSS"
+                  name="url"
+                  autocomplete="off"
+                  autofocus
+                >
+                <label for="url-input">Ссылка RSS</label>
+              </div>
+              <div class="feedback invalid-feedback"></div>
             </div>
             <div class="col-auto">
-              <button type="submit" class="btn btn-primary btn-lg">
+              <button type="submit" class="btn btn-primary btn-lg px-5 h-100" aria-label="add">
                 Добавить
               </button>
             </div>
