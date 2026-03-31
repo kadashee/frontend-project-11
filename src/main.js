@@ -1,16 +1,17 @@
 import './style.css';
+import initI18n from './i18n.js';
 import state from './state.js';
 import { validateUrl } from './validator.js';
 import { initView } from './view.js';
 
-const app = () => {
+const app = (i18n) => {
   const elements = {
     form: document.querySelector('#rss-form'),
     input: document.querySelector('#url-input'),
     feedback: document.querySelector('.feedback'),
   };
 
-  initView(state, elements);
+  initView(state, elements, i18n);
 
   elements.form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -36,4 +37,4 @@ const app = () => {
   });
 };
 
-app();
+initI18n().then(app);

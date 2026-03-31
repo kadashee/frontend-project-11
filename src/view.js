@@ -1,6 +1,6 @@
 import { watch } from 'valtio/vanilla/utils';
 
-const renderValidationState = (formState, elements) => {
+const renderValidationState = (formState, elements, i18n) => {
   const { input, feedback } = elements;
 
   if (formState.valid) {
@@ -9,14 +9,14 @@ const renderValidationState = (formState, elements) => {
     feedback.classList.remove('d-block');
   } else {
     input.classList.add('is-invalid');
-    feedback.textContent = formState.error;
+    feedback.textContent = i18n.t(formState.error);
     feedback.classList.add('d-block');
   }
 };
 
-export const initView = (state, elements) => {
+export const initView = (state, elements, i18n) => {
   watch((get) => {
     const formState = get(state.form);
-    renderValidationState(formState, elements);
+    renderValidationState(formState, elements, i18n);
   });
 };

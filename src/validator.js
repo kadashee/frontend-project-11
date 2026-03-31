@@ -1,10 +1,19 @@
 import * as yup from 'yup';
 
+yup.setLocale({
+  mixed: {
+    required: 'errors.required',
+  },
+  string: {
+    url: 'errors.invalidUrl',
+  },
+});
+
 const createSchema = (existingUrls) => {
   return yup.string()
-    .required('Не должно быть пустым')
-    .url('Ссылка должна быть валидным URL')
-    .notOneOf(existingUrls, 'RSS уже существует');
+    .required()
+    .url()
+    .notOneOf(existingUrls, 'errors.duplicate');
 };
 
 export const validateUrl = (url, existingUrls) => {
