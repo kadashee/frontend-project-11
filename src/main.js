@@ -7,13 +7,7 @@ import { initView } from './view.js';
 import loadRss from './rssClient.js';
 import parseRss from './parser.js';
 
-const normalizeError = (error) => {
-  if (error.message?.startsWith('errors.')) {
-    return error.message;
-  }
-
-  return 'errors.network';
-};
+const normalizeError = (error) => error.message || 'errors.network';
 
 const app = (i18n) => {
   const state = createState();
@@ -90,9 +84,8 @@ const app = (i18n) => {
     state.form.processState = 'loading';
 
     validateUrl(url, existingUrls)
-      .then(() => loadRss(url)
-        .then((rssContent) => ({ rssContent })))
-      .then(({ rssContent }) => {
+      .then(() => loadRss(url))
+      .then((rssContent) => {
         const parsedRss = parseRss(rssContent);
         const feedId = crypto.randomUUID();
         const feed = {
