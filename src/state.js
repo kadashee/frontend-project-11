@@ -1,4 +1,4 @@
-import { proxy } from 'valtio/vanilla';
+import { proxy } from 'valtio/vanilla'
 
 const createState = () => proxy({
   form: {
@@ -14,6 +14,6 @@ const createState = () => proxy({
       postId: null,
     },
   },
-});
+})
 
-export default createState;
+export default createState

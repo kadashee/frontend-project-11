@@ -1,50 +1,50 @@
-import { subscribe, snapshot } from 'valtio/vanilla';
+import { subscribe, snapshot } from 'valtio/vanilla'
 
 const renderValidationState = (formState, elements, i18n) => {
   const {
     input,
     feedback,
     submit,
-  } = elements;
+  } = elements
 
-  const isLoading = formState.processState === 'loading';
+  const isLoading = formState.processState === 'loading'
 
-  input.readOnly = isLoading;
-  submit.disabled = isLoading;
+  input.readOnly = isLoading
+  submit.disabled = isLoading
 
   if (formState.processState === 'success') {
-    input.classList.remove('is-invalid');
-    feedback.textContent = i18n.t('messages.success');
-    feedback.classList.remove('text-danger');
-    feedback.classList.add('text-success');
-    return;
+    input.classList.remove('is-invalid')
+    feedback.textContent = i18n.t('messages.success')
+    feedback.classList.remove('text-danger')
+    feedback.classList.add('text-success')
+    return
   }
 
   if (formState.processState === 'failed') {
-    input.classList.add('is-invalid');
-    feedback.textContent = i18n.t(formState.error);
-    feedback.classList.remove('text-success');
-    feedback.classList.add('text-danger');
-    return;
+    input.classList.add('is-invalid')
+    feedback.textContent = i18n.t(formState.error)
+    feedback.classList.remove('text-success')
+    feedback.classList.add('text-danger')
+    return
   }
 
-  input.classList.remove('is-invalid');
-  feedback.textContent = '';
-  feedback.classList.remove('text-danger', 'text-success');
-};
+  input.classList.remove('is-invalid')
+  feedback.textContent = ''
+  feedback.classList.remove('text-danger', 'text-success')
+}
 
 const renderFeeds = (feeds, container, i18n) => {
   if (feeds.length === 0) {
-    container.innerHTML = '';
-    return;
+    container.innerHTML = ''
+    return
   }
 
-  const items = feeds.map((feed) => `
+  const items = feeds.map(feed => `
     <li class="list-group-item border-0 border-end-0">
       <h3 class="h6 m-0">${feed.title}</h3>
       <p class="m-0 small text-black-50">${feed.description}</p>
     </li>
-  `).join('');
+  `).join('')
 
   container.innerHTML = `
     <div class="card border-0">
@@ -55,16 +55,16 @@ const renderFeeds = (feeds, container, i18n) => {
         ${items}
       </ul>
     </div>
-  `;
-};
+  `
+}
 
 const renderPosts = (posts, readPosts, container, i18n) => {
   if (posts.length === 0) {
-    container.innerHTML = '';
-    return;
+    container.innerHTML = ''
+    return
   }
 
-  const items = posts.map((post) => `
+  const items = posts.map(post => `
     <li class="list-group-item d-flex justify-content-between align-items-start border-0 border-end-0">
       <a
         class="${readPosts.includes(post.id) ? 'fw-normal link-secondary' : 'fw-bold'}"
@@ -75,7 +75,7 @@ const renderPosts = (posts, readPosts, container, i18n) => {
       >${post.title}</a>
       <button type="button" class="btn btn-outline-primary btn-sm" data-id="${post.id}">${i18n.t('buttons.view')}</button>
     </li>
-  `).join('');
+  `).join('')
 
   container.innerHTML = `
     <div class="card border-0">
@@ -86,32 +86,32 @@ const renderPosts = (posts, readPosts, container, i18n) => {
         ${items}
       </ul>
     </div>
-  `;
-};
+  `
+}
 
 const renderModal = (posts, postId, elements, i18n) => {
-  const post = posts.find((item) => item.id === postId);
+  const post = posts.find(item => item.id === postId)
 
   if (!post) {
-    elements.modalTitle.textContent = '';
-    elements.modalBody.textContent = '';
-    elements.modalLink.removeAttribute('href');
-    return;
+    elements.modalTitle.textContent = ''
+    elements.modalBody.textContent = ''
+    elements.modalLink.removeAttribute('href')
+    return
   }
 
-  elements.modalTitle.textContent = post.title;
-  elements.modalBody.textContent = post.description;
-  elements.modalLink.href = post.link;
-  elements.modalLink.textContent = i18n.t('buttons.readMore');
-};
+  elements.modalTitle.textContent = post.title
+  elements.modalBody.textContent = post.description
+  elements.modalLink.href = post.link
+  elements.modalLink.textContent = i18n.t('buttons.readMore')
+}
 
 export const initView = (state, elements, i18n) => {
   subscribe(state, () => {
-    const snap = snapshot(state);
+    const snap = snapshot(state)
 
-    renderValidationState(snap.form, elements, i18n);
-    renderFeeds(snap.feeds, elements.feeds, i18n);
-    renderPosts(snap.posts, snap.ui.readPosts, elements.posts, i18n);
-    renderModal(snap.posts, snap.ui.modal.postId, elements, i18n);
-  });
-};
+    renderValidationState(snap.form, elements, i18n)
+    renderFeeds(snap.feeds, elements.feeds, i18n)
+    renderPosts(snap.posts, snap.ui.readPosts, elements.posts, i18n)
+    renderModal(snap.posts, snap.ui.modal.postId, elements, i18n)
+  })
+}

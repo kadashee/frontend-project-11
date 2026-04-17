@@ -1,4 +1,4 @@
-import i18next from 'i18next';
+import i18next from 'i18next'
 
 const resources = {
   ru: {
@@ -24,12 +24,12 @@ const resources = {
       },
     },
   },
-};
+}
 
 const initI18n = () => i18next.init({
   lng: 'ru',
   debug: false,
   resources,
-}).then(() => i18next);
+}).then(() => i18next)
 
-export default initI18n;
+export default initI18n
