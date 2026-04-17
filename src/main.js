@@ -7,12 +7,18 @@ import { initView } from './view.js';
 import loadRss from './rssClient.js';
 import parseRss from './parser.js';
 
-const normalizeError = (error) => error.message || 'errors.network';
+const normalizeError = (error) => {
+  if (error.message?.startsWith('errors.')) {
+    return error.message;
+  }
 
-const createId = () => String(Date.now() + Math.random());
+  return 'errors.network';
+};
 
 const app = (i18n) => {
   const state = createState();
+  let idCounter = 1;
+  const createId = () => String(idCounter++);
 
   const updateFeeds = () => {
     const promises = state.feeds.map((feed) => loadRss(feed.url)
@@ -51,8 +57,8 @@ const app = (i18n) => {
     submit: document.querySelector('button[type="submit"]'),
     feeds: document.querySelector('#feeds'),
     posts: document.querySelector('#posts'),
-    modal: document.querySelector('#postModal'),
-    modalTitle: document.querySelector('#postModalLabel'),
+    modal: document.querySelector('#modal'),
+    modalTitle: document.querySelector('#modalLabel'),
     modalBody: document.querySelector('.modal-body'),
     modalLink: document.querySelector('.full-article'),
   };
