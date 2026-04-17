@@ -1,1 +1,9 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.feedback {
+  min-height: 1.5rem;
+}
+
+#rss-form .btn {
+  height: 58px;
+}

@@ -1,12 +1,19 @@
 import { proxy } from 'valtio/vanilla';
 
-const state = proxy({
+const createState = () => proxy({
   form: {
     valid: true,
     error: null,
+    processState: 'idle',
   },
   feeds: [],
   posts: [],
+  ui: {
+    readPosts: [],
+    modal: {
+      postId: null,
+    },
+  },
 });
 
-export default state;
+export default createState;

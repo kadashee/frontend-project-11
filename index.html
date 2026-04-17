@@ -31,16 +31,28 @@
                 >
                 <label for="url-input">Ссылка RSS</label>
               </div>
-              <div class="feedback invalid-feedback"></div>
+              <p class="example mt-2 mb-0 text-secondary">Пример: https://lorem-rss.hexlet.app/feed</p>
+              <p class="feedback mt-2 mb-0 small"></p>
             </div>
             <div class="col-auto">
-              <button type="submit" class="btn btn-primary btn-lg px-5 h-100" aria-label="add">
+              <button type="submit" class="btn btn-lg btn-primary px-sm-5" aria-label="add">
                 Добавить
               </button>
             </div>
           </div>
         </form>
 
+      </div>
+    </div>
+  </section>
+
+  <section class="container-xxl mt-5">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <div class="row gy-4">
+          <div class="col-12 col-lg-8" id="posts"></div>
+          <div class="col-12 col-lg-4" id="feeds"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -52,6 +64,22 @@
     <a href="https://github.com/kadashee">kadashee</a>
   </div>
 </footer>
+
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="postModalLabel"></h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <a class="btn btn-primary full-article" href="#" target="_blank" rel="noopener noreferrer">Читать полностью</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
