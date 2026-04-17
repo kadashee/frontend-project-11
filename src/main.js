@@ -9,6 +9,8 @@ import parseRss from './parser.js';
 
 const normalizeError = (error) => error.message || 'errors.network';
 
+const createId = () => String(Date.now() + Math.random());
+
 const app = (i18n) => {
   const state = createState();
 
@@ -20,7 +22,7 @@ const app = (i18n) => {
         const newPosts = parsedRss.posts
           .filter((post) => !existingLinks.includes(post.link))
           .map((post) => ({
-            id: crypto.randomUUID(),
+            id: createId(),
             feedId: feed.id,
             ...post,
           }));
@@ -87,14 +89,14 @@ const app = (i18n) => {
       .then(() => loadRss(url))
       .then((rssContent) => {
         const parsedRss = parseRss(rssContent);
-        const feedId = crypto.randomUUID();
+        const feedId = createId();
         const feed = {
           id: feedId,
           url,
           ...parsedRss.feed,
         };
         const posts = parsedRss.posts.map((post) => ({
-          id: crypto.randomUUID(),
+          id: createId(),
           feedId,
           ...post,
         }));
