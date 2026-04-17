@@ -8,10 +8,12 @@ const buildProxyUrl = (url) => {
 
 const loadRss = async (url) => {
   let response;
+  const proxyUrl = buildProxyUrl(url);
 
   try {
-    response = await fetch(buildProxyUrl(url));
-  } catch {
+    response = await fetch(proxyUrl);
+  } catch (e) {
+    console.error('FETCH ERROR', proxyUrl, e?.message);
     throw new Error('errors.network');
   }
 
