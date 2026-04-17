@@ -1,4 +1,4 @@
-const getElementTextContent = (element, selector) => {
+const getRequiredText = (element, selector) => {
   const target = element.querySelector(selector);
 
   if (!target) {
@@ -6,6 +6,11 @@ const getElementTextContent = (element, selector) => {
   }
 
   return target.textContent.trim();
+};
+
+const getOptionalText = (element, selector) => {
+  const target = element.querySelector(selector);
+  return target ? target.textContent.trim() : '';
 };
 
 const parseRss = (content) => {
@@ -23,16 +28,16 @@ const parseRss = (content) => {
   }
 
   const feed = {
-    title: getElementTextContent(channel, 'title'),
-    description: getElementTextContent(channel, 'description'),
+    title: getRequiredText(channel, 'title'),
+    description: getOptionalText(channel, 'description'),
   };
 
   const posts = Array
     .from(channel.querySelectorAll('item'))
     .map((item) => ({
-      title: getElementTextContent(item, 'title'),
-      description: getElementTextContent(item, 'description'),
-      link: getElementTextContent(item, 'link'),
+      title: getOptionalText(item, 'title'),
+      description: getOptionalText(item, 'description'),
+      link: getOptionalText(item, 'link'),
     }));
 
   return { feed, posts };
