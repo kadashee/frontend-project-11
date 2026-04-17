@@ -4,4 +4,4 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=kadashee_frontend-project-11&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=kadashee_frontend-project-11)
 
 ## Ссылка на сайт
-https://frontend-project-11-5vjuvqzdc-kadashees-projects.vercel.app/
+[https://frontend-project-11-5vjuvqzdc-kadashees-projects.vercel.app/](https://frontend-project-11-sert.vercel.app/)
