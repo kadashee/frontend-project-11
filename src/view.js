@@ -1,4 +1,4 @@
-import { watch } from 'valtio/vanilla/utils';
+import { subscribe, snapshot } from 'valtio/vanilla';
 
 const renderValidationState = (formState, elements, i18n) => {
   const {
@@ -106,12 +106,12 @@ const renderModal = (posts, postId, elements, i18n) => {
 };
 
 export const initView = (state, elements, i18n) => {
-  watch((get) => {
-    const ui = get(state.ui);
+  subscribe(state, () => {
+    const snap = snapshot(state);
 
-    renderValidationState(get(state.form), elements, i18n);
-    renderFeeds(get(state.feeds), elements.feeds, i18n);
-    renderPosts(get(state.posts), ui.readPosts, elements.posts, i18n);
-    renderModal(get(state.posts), ui.modal.postId, elements, i18n);
+    renderValidationState(snap.form, elements, i18n);
+    renderFeeds(snap.feeds, elements.feeds, i18n);
+    renderPosts(snap.posts, snap.ui.readPosts, elements.posts, i18n);
+    renderModal(snap.posts, snap.ui.modal.postId, elements, i18n);
   });
 };
