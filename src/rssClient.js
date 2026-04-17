@@ -8,12 +8,10 @@ const buildProxyUrl = (url) => {
 
 const loadRss = async (url) => {
   let response;
-  const proxyUrl = buildProxyUrl(url);
 
   try {
-    response = await fetch(proxyUrl);
-  } catch (e) {
-    console.error('FETCH ERROR', proxyUrl, e?.message);
+    response = await fetch(buildProxyUrl(url));
+  } catch {
     throw new Error('errors.network');
   }
 
@@ -29,7 +27,7 @@ const loadRss = async (url) => {
     throw new Error('errors.network');
   }
 
-  if (!Object.hasOwn(data, 'contents')) {
+  if (!data.contents) {
     throw new Error('errors.network');
   }
 

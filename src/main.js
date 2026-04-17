@@ -90,14 +90,14 @@ const app = (i18n) => {
     state.form.processState = 'loading';
 
     validateUrl(url, existingUrls)
-      .then((validUrl) => loadRss(validUrl)
-        .then((rssContent) => ({ validUrl, rssContent })))
-      .then(({ validUrl, rssContent }) => {
+      .then(() => loadRss(url)
+        .then((rssContent) => ({ rssContent })))
+      .then(({ rssContent }) => {
         const parsedRss = parseRss(rssContent);
         const feedId = crypto.randomUUID();
         const feed = {
           id: feedId,
-          url: validUrl,
+          url,
           ...parsedRss.feed,
         };
         const posts = parsedRss.posts.map((post) => ({
